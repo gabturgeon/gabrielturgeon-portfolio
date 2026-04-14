@@ -29,7 +29,7 @@ const T = {
     grad:"linear-gradient(135deg,#c0392b,#922b21)",
     gradText:"linear-gradient(135deg,#e05040,#c0392b,#922b21)",
     orb1:"rgba(192,57,43,0.13)",orb2:"rgba(146,43,33,0.08)",
-    divider:"rgba(192,57,43,0.28)",themeIcon:"☀️",
+    divider:"rgba(192,57,43,0.28)",
     overlay:"rgba(0,0,0,0.82)",
   },
   light: {
@@ -42,7 +42,7 @@ const T = {
     grad:"linear-gradient(135deg,#c0392b,#922b21)",
     gradText:"linear-gradient(135deg,#c0392b,#922b21)",
     orb1:"rgba(192,57,43,0.06)",orb2:"rgba(146,43,33,0.04)",
-    divider:"rgba(192,57,43,0.2)",themeIcon:"🌙",
+    divider:"rgba(192,57,43,0.2)",
     overlay:"rgba(0,0,0,0.6)",
   },
 };
@@ -53,36 +53,44 @@ const NAV = ["About","Skills","Projects","Commissions","Experience","Testimonial
 const SKILLS = [
   {name:"React"},{name:"TypeScript"},{name:"Next.js"},{name:"Node.js"},
   {name:"Python"},{name:"PostgreSQL"},{name:"JavaScript"},{name:"Tailwind CSS"},
+  {name:"HTML"},{name:"CSS"},{name:"Supabase"},
 ];
-const PROFICIENT = ["REST APIs","HTML","CSS","Supabase"];
+
+const PROFILE_IMAGE = "assets/profile.jpg";
 
 const PROJECTS = [
-  { title:"NeuroFlow AI Dashboard",year:"2024",icon:"🧠",
+  { title:"NeuroFlow AI Dashboard",year:"2024",icon:"analytics",
+    image:"https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
     desc:"Real-time analytics platform processing 10M+ events/day with sub-100ms latency.",
     fullDesc:"NeuroFlow is a production-grade analytics platform built for data-intensive applications. Using Apache Kafka for stream processing and a Python ML backend, it delivers anomaly detection, forecasting, and pattern recognition in real time. The React dashboard features a drag-and-drop chart builder, multi-tenant auth, and a WebSocket push layer for live updates.",
     highlights:["10M+ events/day","<100ms P99 latency","Custom ML anomaly detection","Multi-tenant RBAC","Drag-and-drop dashboard builder"],
     tags:["React","Node.js","Python","Kafka","PostgreSQL"],link:null,github:null },
-  { title:"DeployHub — CI/CD",year:"2023",icon:"🚀",
+  { title:"DeployHub — CI/CD",year:"2023",icon:"deploy",
+    image:"https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
     desc:"Self-hosted multi-cloud deployment platform. Reduced deploy times by 70%.",
     fullDesc:"DeployHub is a self-hosted CI/CD platform that orchestrates deployments across AWS, GCP, and Azure from a single UI. Built with TypeScript and a Kubernetes operator, it manages 200+ microservices with zero-downtime rolling deploys, automatic rollbacks, and Slack notifications. Cut average deploy time from 14 minutes to under 4.",
     highlights:["70% faster deployments","200+ microservices","Zero-downtime rollbacks","Multi-cloud (AWS/GCP/Azure)","Slack & webhook notifications"],
     tags:["TypeScript","Kubernetes","Docker","AWS","Terraform"],link:null,github:null },
-  { title:"OpenCart E-Commerce",year:"2023",icon:"🛒",
+  { title:"OpenCart E-Commerce",year:"2023",icon:"commerce",
+    image:"https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=80",
     desc:"High-performance backend handling $2M+ monthly transactions.",
     fullDesc:"A headless e-commerce engine powering a retail brand with $2M+ in monthly GMV. Leverages Next.js for the storefront, a GraphQL API layer for flexible data fetching, Redis for cart and session caching, and Stripe for payments. Includes a real-time inventory sync service and a machine-learning recommendation engine trained on purchase history.",
     highlights:["$2M+ monthly GMV","Sub-200ms storefront TTI","ML recommendation engine","Real-time inventory sync","PCI-compliant checkout"],
     tags:["Next.js","GraphQL","Redis","Stripe","Elastic"],link:null,github:null },
-  { title:"SyncSpace Collaboration",year:"2022",icon:"🌐",
+  { title:"SyncSpace Collaboration",year:"2022",icon:"collaboration",
+    image:"https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80",
     desc:"Conflict-free real-time workspace supporting 1000+ concurrent users per doc.",
     fullDesc:"SyncSpace is a collaborative workspace tool (think Notion + Figma) that uses CRDTs (Conflict-free Replicated Data Types) to enable conflict-free real-time editing across thousands of concurrent sessions. The backend uses Node.js with a custom operational transform engine, and the React frontend renders updates at 60fps even under heavy load.",
     highlights:["1000+ concurrent users/doc","CRDT conflict resolution","60fps real-time rendering","Offline-first with sync","End-to-end encrypted content"],
     tags:["React","WebSockets","CRDTs","Node.js","MongoDB"],link:null,github:null },
-  { title:"AuthKit SDK",year:"2022",icon:"🔐",
+  { title:"AuthKit SDK",year:"2022",icon:"security",
+    image:"https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?auto=format&fit=crop&w=1200&q=80",
     desc:"Open-source auth library with OAuth2, PKCE, and MFA. 2K+ GitHub stars.",
     fullDesc:"AuthKit is an open-source TypeScript SDK that wraps OAuth2, PKCE, magic links, and TOTP MFA into a single, framework-agnostic package. It integrates natively with Supabase, PostgreSQL-backed sessions, and custom auth providers. Published on npm with full TypeScript generics, tree-shaking, and a zero-dependency core.",
     highlights:["2K+ GitHub stars","Zero-dependency core","OAuth2 + PKCE + MFA","Supabase integration","Full TypeScript generics"],
     tags:["TypeScript","PostgreSQL","Supabase","OAuth2"],link:null,github:null },
-  { title:"PulseMetrics",year:"2021",icon:"📊",
+  { title:"PulseMetrics",year:"2021",icon:"metrics",
+    image:"https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
     desc:"Lightweight self-hostable product analytics with funnels and retention.",
     fullDesc:"PulseMetrics is a lightweight, privacy-first analytics tool you can self-host in under 5 minutes. It tracks events, builds funnels, computes retention cohorts, and renders charts — all from a single Next.js app backed by Python. No cookies, no third-party trackers, and a one-click Docker deployment.",
     highlights:["Self-hostable in <5 min","Cookie-free tracking","Funnel & cohort analysis","One-click Docker deploy","Real-time event stream"],
@@ -90,32 +98,38 @@ const PROJECTS = [
 ];
 
 const COMMISSIONS = [
-  { client:"Verdant Studio",type:"Full-Stack Web App",year:"2024",icon:"🎨",
+  { client:"Verdant Studio",type:"Full-Stack Web App",year:"2024",icon:"studio",
+    image:"https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80",
     desc:"End-to-end booking platform for a creative agency built with Next.js and Supabase.",
     fullDesc:"Designed and built a complete client-facing booking and project management platform. Features include a custom CMS, availability calendar, contract e-signing, invoice generation, and a Stripe-powered payment flow. The admin dashboard gives the studio real-time visibility into their pipeline.",
     highlights:["Custom headless CMS","Stripe invoice + payments","Contract e-signing","Availability calendar","Mobile-first responsive UI"],
     tags:["Next.js","Supabase","Tailwind CSS"],link:null,status:"Delivered" },
-  { client:"NorthBridge Capital",type:"Internal Dashboard",year:"2024",icon:"📈",
+  { client:"NorthBridge Capital",type:"Internal Dashboard",year:"2024",icon:"finance",
+    image:"https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80",
     desc:"Custom portfolio analytics dashboard aggregating data from multiple financial APIs.",
     fullDesc:"Built a secure internal dashboard for a boutique investment firm to track their portfolio in real time. Pulls data from Bloomberg, Refinitiv, and proprietary APIs, normalizes it into a PostgreSQL data warehouse, and serves it through a React dashboard with exportable PDF reports.",
     highlights:["Multi-API data aggregation","PDF reporting engine","Role-based access control","Real-time price feeds","SOC 2 compliant"],
     tags:["React","TypeScript","PostgreSQL"],link:null,status:"Delivered" },
-  { client:"Lumière Events",type:"Landing Page + CMS",year:"2023",icon:"✨",
+  { client:"Lumière Events",type:"Landing Page + CMS",year:"2023",icon:"events",
+    image:"https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1200&q=80",
     desc:"High-conversion event marketing site with multilingual support and headless CMS.",
     fullDesc:"Created a visually rich event marketing site with an integrated headless CMS so the client can update content without a developer. Supports English and French, includes custom animations, RSVP flows, and integrates with Mailchimp for attendee nurturing.",
     highlights:["EN/FR multilingual","Custom animation system","RSVP + Mailchimp flows","Headless CMS","PageSpeed 98/100"],
     tags:["Next.js","Tailwind CSS","REST APIs"],link:null,status:"Delivered" },
-  { client:"Arcane Labs",type:"API Integration Layer",year:"2023",icon:"🔌",
+  { client:"Arcane Labs",type:"API Integration Layer",year:"2023",icon:"integration",
+    image:"https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80",
     desc:"Middleware service connecting Shopify, HubSpot, and Slack with automated workflows.",
     fullDesc:"Designed a Node.js middleware service that acts as an event bus between Shopify orders, HubSpot CRM records, and Slack notifications. Includes a no-code workflow builder for the client team, retry queues with exponential backoff, and a monitoring dashboard.",
     highlights:["3-platform integration","No-code workflow builder","Retry queues + backoff","Event replay support","<50ms webhook latency"],
     tags:["Node.js","REST APIs","AWS"],link:null,status:"Delivered" },
-  { client:"Maison Dubois",type:"E-Commerce Migration",year:"2022",icon:"🏛️",
+  { client:"Maison Dubois",type:"E-Commerce Migration",year:"2022",icon:"migration",
+    image:"https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&w=1200&q=80",
     desc:"Migrated a legacy Magento store to Next.js Commerce with custom checkout.",
     fullDesc:"Full platform migration from a slow, outdated Magento 1 store to a blazing-fast Next.js storefront. Zero data loss, custom checkout flow, persistent cart, and a 12× improvement in Lighthouse performance score. Completed ahead of the holiday shopping season.",
     highlights:["12× Lighthouse improvement","Zero data loss migration","Custom checkout flow","Persistent cart sync","Pre-holiday delivery"],
     tags:["Next.js","PostgreSQL","Stripe"],link:null,status:"Delivered" },
-  { client:"Pulse Health",type:"Patient Portal",year:"2022",icon:"🩺",
+  { client:"Pulse Health",type:"Patient Portal",year:"2022",icon:"health",
+    image:"https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1200&q=80",
     desc:"HIPAA-compliant patient portal with appointment booking and secure messaging.",
     fullDesc:"Built a HIPAA-compliant patient portal for a telehealth provider. Features include online appointment scheduling, async secure messaging with providers, lab result uploads, and insurance card management. Fully audited for HIPAA compliance and integrated with their existing EHR via HL7 FHIR.",
     highlights:["HIPAA compliant","HL7 FHIR EHR integration","Secure async messaging","Lab result management","Appointment scheduling"],
@@ -210,19 +224,41 @@ const TechIcon = ({name,size=26})=>{
   }
 };
 
+const IconGlyph=({name,size=24,color="currentColor"})=>{
+  const common={width:size,height:size,viewBox:"0 0 24 24",fill:"none",stroke:color,strokeWidth:"1.8",strokeLinecap:"round",strokeLinejoin:"round"};
+  switch(name){
+    case"analytics":return<svg {...common}><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 15l3-4 3 2 4-6"/><path d="M18 7h2v2"/></svg>;
+    case"deploy":return<svg {...common}><path d="M12 3v12"/><path d="M7 8l5-5 5 5"/><path d="M5 16v3h14v-3"/><path d="M8 19h8"/></svg>;
+    case"commerce":return<svg {...common}><path d="M6 7h15l-2 8H8L6 7Z"/><path d="M6 7 5 4H2"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>;
+    case"collaboration":return<svg {...common}><circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><path d="M3 20c.8-3.3 2.7-5 5-5s4.2 1.7 5 5"/><path d="M11 16c1-.7 2.2-1 3.5-1 2.3 0 4.2 1.7 5 5"/></svg>;
+    case"security":return<svg {...common}><path d="M12 3 5 6v5c0 4.5 2.8 8.4 7 10 4.2-1.6 7-5.5 7-10V6l-7-3Z"/><path d="m9.5 12 1.8 1.8 3.7-4"/></svg>;
+    case"metrics":return<svg {...common}><path d="M4 19h16"/><path d="M7 16V9"/><path d="M12 16V5"/><path d="M17 16v-4"/></svg>;
+    case"studio":return<svg {...common}><path d="M4 20h16"/><path d="M6 17V7l6-3 6 3v10"/><path d="M9 17v-6h6v6"/></svg>;
+    case"finance":return<svg {...common}><path d="M4 19V5"/><path d="M4 19h16"/><path d="m7 14 4-4 3 3 5-7"/></svg>;
+    case"events":return<svg {...common}><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M4 10h16"/><path d="M9 15h6"/></svg>;
+    case"integration":return<svg {...common}><path d="M8 12h8"/><path d="M6 8a4 4 0 0 0 0 8"/><path d="M18 8a4 4 0 0 1 0 8"/><circle cx="6" cy="12" r="2"/><circle cx="18" cy="12" r="2"/></svg>;
+    case"migration":return<svg {...common}><path d="M5 5h10v6H5z"/><path d="M9 15h10v4H9z"/><path d="M15 8h3a3 3 0 0 1 0 6H9"/><path d="m11 12-2 2 2 2"/></svg>;
+    case"health":return<svg {...common}><path d="M20.5 9.5c0 5-8.5 10-8.5 10s-8.5-5-8.5-10A4.5 4.5 0 0 1 12 7a4.5 4.5 0 0 1 8.5 2.5Z"/><path d="M12 9v6"/><path d="M9 12h6"/></svg>;
+    case"work":return<svg {...common}><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5h6v2"/><path d="M3 12h18"/></svg>;
+    case"education":return<svg {...common}><path d="m3 9 9-5 9 5-9 5-9-5Z"/><path d="M7 11v5c2.8 2 7.2 2 10 0v-5"/><path d="M21 9v6"/></svg>;
+    case"sun":return<svg {...common}><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>;
+    case"moon":return<svg {...common}><path d="M20 14.5A7.5 7.5 0 0 1 9.5 4 8 8 0 1 0 20 14.5Z"/></svg>;
+    case"user":return<svg {...common}><circle cx="12" cy="8" r="4"/><path d="M4 21c1.8-4 4.4-6 8-6s6.2 2 8 6"/></svg>;
+    default:return<svg {...common}><rect x="5" y="5" width="14" height="14" rx="3"/><path d="M9 12h6"/></svg>;
+  }
+};
+
 // Social SVG icons
 const GithubIcon=({size=18,color})=><svg width={size} height={size} viewBox="0 0 24 24" fill={color||"currentColor"}><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>;
 const LinkedInIcon=({size=18,color})=><svg width={size} height={size} viewBox="0 0 24 24" fill={color||"currentColor"}><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>;
 const MailIcon=({size=18,color})=><svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color||"currentColor"} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>;
 const InstagramIcon=({size=18,color})=><svg width={size} height={size} viewBox="0 0 24 24" fill={color||"currentColor"}><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>;
-const TikTokIcon=({size=18,color})=><svg width={size} height={size} viewBox="0 0 24 24" fill={color||"currentColor"}><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>;
 const YouTubeIcon=({size=18,color})=><svg width={size} height={size} viewBox="0 0 24 24" fill={color||"currentColor"}><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>;
 
 const SOCIALS = [
   {label:"GitHub",   Icon:GithubIcon,   href:"https://github.com/gvbs"},
   {label:"LinkedIn", Icon:LinkedInIcon, href:"https://linkedin.com/in/gvbs"},
   {label:"Instagram",Icon:InstagramIcon,href:"https://instagram.com/gvbs"},
-  {label:"TikTok",   Icon:TikTokIcon,   href:"https://tiktok.com/@gvbs"},
   {label:"YouTube",  Icon:YouTubeIcon,  href:"https://youtube.com/@gvbs"},
   {label:"Email",    Icon:MailIcon,     href:"mailto:hello@gvbs.dev"},
 ];
@@ -277,7 +313,7 @@ function Modal({item,t,onClose,isCommission}) {
       padding:isMobile?"12px":"24px",overflowY:"auto"}}>
       <div onClick={e=>e.stopPropagation()}
         style={{background:t.bgCard,borderRadius:8,border:`1px solid ${t.accentBorder}`,
-          width:"100%",maxWidth:640,maxHeight:"90vh",overflowY:"auto",
+          width:"100%",maxWidth:720,maxHeight:"90vh",overflowY:"auto",
           boxShadow:`0 40px 80px ${t.glow},0 0 0 1px ${t.border}`,
           animation:"modalIn 0.28s cubic-bezier(0.34,1.4,0.64,1)"}}>
         {/* Header */}
@@ -286,7 +322,9 @@ function Modal({item,t,onClose,isCommission}) {
           <div style={{display:"flex",alignItems:"center",gap:14}}>
             <div style={{width:52,height:52,borderRadius:6,background:t.accentBg,
               border:`1px solid ${t.accentBorder}`,display:"flex",alignItems:"center",
-              justifyContent:"center",fontSize:26,flexShrink:0}}>{item.icon}</div>
+              justifyContent:"center",flexShrink:0,color:t.accent}}>
+              <IconGlyph name={item.icon} size={25}/>
+            </div>
             <div>
               <h3 style={{fontFamily:"'Cormorant Garamond',serif",fontWeight:600,
                 fontSize:isMobile?"20px":"24px",color:t.text,lineHeight:1.2}}>{item.title||item.client}</h3>
@@ -305,6 +343,14 @@ function Modal({item,t,onClose,isCommission}) {
         </div>
         {/* Body */}
         <div style={{padding:isMobile?"20px":"28px 32px"}}>
+          {item.image&&(
+            <div style={{height:isMobile?180:240,borderRadius:6,overflow:"hidden",
+              border:`1px solid ${t.border}`,marginBottom:24,background:t.bgAlt}}>
+              <img src={item.image} alt={`${item.title||item.client} visual`} loading="lazy"
+                style={{width:"100%",height:"100%",objectFit:"cover",display:"block",
+                  filter:"saturate(0.9) contrast(1.05)"}}/>
+            </div>
+          )}
           <p style={{fontFamily:"'Inter',sans-serif",color:t.sub,fontSize:14,
             lineHeight:1.8,marginBottom:24,fontWeight:300}}>{item.fullDesc}</p>
           {/* Highlights */}
@@ -384,7 +430,7 @@ function AnimBg({t}) {
 }
 
 // ─── NAVBAR ──────────────────────────────────────────────────────────────────
-function Navbar({t,toggle}) {
+function Navbar({t,dark,toggle}) {
   const [scrolled,setScrolled]=useState(false);
   const [open,setOpen]=useState(false);
   const active=useScrollSpy();
@@ -431,7 +477,9 @@ function Navbar({t,toggle}) {
           ))}
           <button onClick={toggle} style={{marginLeft:6,width:32,height:32,borderRadius:7,
             background:t.chipBg,border:`1px solid ${t.chipBorder}`,cursor:"pointer",
-            fontSize:14,display:"flex",alignItems:"center",justifyContent:"center"}}>{t.themeIcon}</button>
+            color:t.sub,display:"flex",alignItems:"center",justifyContent:"center"}}>
+            <IconGlyph name={dark?"sun":"moon"} size={16}/>
+          </button>
           <button onClick={()=>go("Contact")} style={{marginLeft:6,padding:"7px 18px",borderRadius:6,
             background:t.grad,border:"none",color:"#fff",fontFamily:"'Inter',sans-serif",
             fontWeight:600,fontSize:11,letterSpacing:"0.1em",textTransform:"uppercase",
@@ -446,8 +494,10 @@ function Navbar({t,toggle}) {
       {isMobile&&(
         <div style={{display:"flex",gap:8,alignItems:"center"}}>
           <button onClick={toggle} style={{width:32,height:32,borderRadius:7,background:t.chipBg,
-            border:`1px solid ${t.chipBorder}`,cursor:"pointer",fontSize:14,
-            display:"flex",alignItems:"center",justifyContent:"center"}}>{t.themeIcon}</button>
+            border:`1px solid ${t.chipBorder}`,cursor:"pointer",color:t.sub,
+            display:"flex",alignItems:"center",justifyContent:"center"}}>
+            <IconGlyph name={dark?"sun":"moon"} size={16}/>
+          </button>
           <button onClick={()=>setOpen(o=>!o)} style={{width:32,height:32,borderRadius:7,
             background:t.chipBg,border:`1px solid ${t.chipBorder}`,cursor:"pointer",
             color:t.text,fontSize:18,display:"flex",alignItems:"center",justifyContent:"center"}}>
@@ -479,6 +529,41 @@ function Navbar({t,toggle}) {
   );
 }
 
+function ProfilePortrait({t,isMobile}) {
+  const [ready,setReady]=useState(true);
+  return(
+    <Reveal delay={260} x={isMobile?0:24} y={isMobile?18:0}
+      style={{position:isMobile?"relative":"absolute",right:isMobile?"auto":"7vw",
+        top:isMobile?"auto":"19%",width:isMobile?"100%":"min(34vw,420px)",
+        maxWidth:isMobile?360:"none",margin:isMobile?"34px auto 0":0,zIndex:2}}>
+      <div style={{aspectRatio:"4 / 5",borderRadius:8,overflow:"hidden",
+        border:`1px solid ${t.accentBorder}`,background:t.bgCard,
+        boxShadow:`0 28px 90px ${t.glow}`,position:"relative"}}>
+        {ready?(
+          <img src={PROFILE_IMAGE} alt="Gabriel Turgeon" onError={()=>setReady(false)}
+            style={{width:"100%",height:"100%",objectFit:"cover",display:"block",
+              filter:"saturate(0.95) contrast(1.03)"}}/>
+        ):(
+          <div style={{height:"100%",display:"flex",flexDirection:"column",alignItems:"center",
+            justifyContent:"center",gap:14,padding:28,textAlign:"center"}}>
+            <div style={{width:68,height:68,borderRadius:8,display:"flex",alignItems:"center",
+              justifyContent:"center",background:t.accentBg,border:`1px solid ${t.accentBorder}`,
+              color:t.accent}}>
+              <IconGlyph name="user" size={34}/>
+            </div>
+            <div style={{fontFamily:"'Inter',sans-serif",color:t.sub,fontSize:12,
+              lineHeight:1.7,letterSpacing:"0.06em",textTransform:"uppercase"}}>
+              Portrait ready
+            </div>
+          </div>
+        )}
+        <div style={{position:"absolute",inset:0,boxShadow:"inset 0 -80px 120px rgba(0,0,0,0.28)",
+          pointerEvents:"none"}}/>
+      </div>
+    </Reveal>
+  );
+}
+
 // ─── HERO ────────────────────────────────────────────────────────────────────
 function Hero({t}) {
   const [typed,setTyped]=useState("");
@@ -498,7 +583,7 @@ function Hero({t}) {
   return(
     <section id="About" style={{minHeight:"100vh",display:"flex",alignItems:"center",
       padding:`80px ${isMobile?"20px":"40px"} 50px`,position:"relative",zIndex:2}}>
-      <div style={{maxWidth:1080,margin:"0 auto",width:"100%"}}>
+      <div style={{maxWidth:1080,margin:"0 auto",width:"100%",paddingRight:isMobile?0:"34%"}}>
 
         <Reveal delay={0} y={14}>
           <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:26}}>
@@ -564,7 +649,9 @@ function Hero({t}) {
             ))}
           </div>
         </Reveal>
+        {isMobile&&<ProfilePortrait t={t} isMobile={isMobile}/>}
       </div>
+      {!isMobile&&<ProfilePortrait t={t} isMobile={isMobile}/>}
     </section>
   );
 }
@@ -604,19 +691,9 @@ function Skills({t}) {
           </div>
         </Reveal>
 
-        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(200px,1fr))",gap:10,marginBottom:28}}>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(200px,1fr))",gap:10}}>
           {SKILLS.map((s,i)=><SkillCard key={s.name} skill={s} t={t} delay={i*50}/>)}
         </div>
-
-        <Reveal delay={280}>
-          <div style={{padding:"20px 24px",borderRadius:4,background:t.bgCard,border:`1px solid ${t.border}`}}>
-            <p style={{fontFamily:"'Inter',sans-serif",color:t.muted,fontSize:9,fontWeight:700,
-              letterSpacing:"0.16em",textTransform:"uppercase",marginBottom:12}}>Also proficient in</p>
-            <div style={{display:"flex",flexWrap:"wrap",gap:8}}>
-              {PROFICIENT.map(b=><TechChip key={b} t={t}>{b}</TechChip>)}
-            </div>
-          </div>
-        </Reveal>
       </div>
     </section>
   );
@@ -640,20 +717,6 @@ function SkillCard({skill,t,delay}) {
           boxShadow:`0 0 6px ${t.glow}`}}/>
       </div>
     </Reveal>
-  );
-}
-
-function TechChip({children,t}) {
-  const [h,setH]=useState(false);
-  return(
-    <span onMouseOver={()=>setH(true)} onMouseOut={()=>setH(false)}
-      style={{display:"inline-flex",alignItems:"center",gap:6,padding:"5px 12px",borderRadius:3,
-        background:h?t.accentBg:t.chipBg,border:`1px solid ${h?t.accentBorder:t.chipBorder}`,
-        color:h?t.accent:t.sub,fontFamily:"'Inter',sans-serif",fontSize:12,
-        fontWeight:500,cursor:"default",letterSpacing:"0.04em",
-        transition:"all 0.2s",transform:h?"translateY(-1px)":"none"}}>
-      <TechIcon name={children} size={14}/>{children}
-    </span>
   );
 }
 
@@ -702,9 +765,11 @@ function ProjectCard({p,t,onClick}) {
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:12}}>
           <div style={{width:44,height:44,borderRadius:4,background:t.accentBg,
             border:`1px solid ${t.accentBorder}`,display:"flex",alignItems:"center",
-            justifyContent:"center",fontSize:21,
+            justifyContent:"center",color:t.accent,
             transform:h?"rotate(-6deg) scale(1.08)":"none",
-            transition:"transform 0.3s cubic-bezier(0.34,1.56,0.64,1)"}}>{p.icon}</div>
+            transition:"transform 0.3s cubic-bezier(0.34,1.56,0.64,1)"}}>
+            <IconGlyph name={p.icon} size={22}/>
+          </div>
           <span style={{fontFamily:"'Cormorant Garamond',serif",color:t.muted,fontSize:14,fontStyle:"italic"}}>{p.year}</span>
         </div>
         <h3 style={{fontFamily:"'Cormorant Garamond',serif",fontWeight:600,
@@ -773,9 +838,11 @@ function CommCard({c,t,onClick}) {
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:12}}>
           <div style={{width:44,height:44,borderRadius:4,background:t.accentBg,
             border:`1px solid ${t.accentBorder}`,display:"flex",alignItems:"center",
-            justifyContent:"center",fontSize:20,
+            justifyContent:"center",color:t.accent,
             transform:h?"rotate(-6deg) scale(1.08)":"none",
-            transition:"transform 0.3s cubic-bezier(0.34,1.56,0.64,1)"}}>{c.icon}</div>
+            transition:"transform 0.3s cubic-bezier(0.34,1.56,0.64,1)"}}>
+            <IconGlyph name={c.icon} size={22}/>
+          </div>
           <span style={{display:"inline-flex",alignItems:"center",gap:4,padding:"3px 9px",
             borderRadius:3,background:"rgba(34,197,94,0.1)",border:"1px solid rgba(34,197,94,0.22)",
             fontFamily:"'Inter',sans-serif",color:"#4ade80",fontSize:9,fontWeight:600,letterSpacing:"0.08em"}}>
@@ -842,8 +909,8 @@ function ExpCard({item,t,delay}) {
           <div style={{display:"flex",alignItems:"center",gap:10}}>
             <div style={{width:34,height:34,borderRadius:4,background:h?t.grad:t.accentBg,
               border:`1px solid ${t.accentBorder}`,display:"flex",alignItems:"center",
-              justifyContent:"center",fontSize:15,transition:"all 0.25s",flexShrink:0}}>
-              {item.type==="edu"?"🎓":"💼"}
+              justifyContent:"center",transition:"all 0.25s",flexShrink:0,color:h?"#fff":t.accent}}>
+              <IconGlyph name={item.type==="edu"?"education":"work"} size={17}/>
             </div>
             <div>
               <div style={{fontFamily:"'Cormorant Garamond',serif",color:t.text,
@@ -1101,7 +1168,7 @@ function Portfolio() {
     <div style={{background:t.bg,color:t.text,minHeight:"100vh",transition:"background 0.3s,color 0.3s"}}>
       <GlobalCSS t={t}/>
       <AnimBg t={t}/>
-      <Navbar t={t} toggle={()=>setDark(d=>!d)}/>
+      <Navbar t={t} dark={dark} toggle={()=>setDark(d=>!d)}/>
       <main>
         <Hero t={t}/>
         <Skills t={t}/>
