@@ -36,7 +36,7 @@ const NAV = ["About","Skills","Projects","Commissions","Experience","Testimonial
 const SKILLS = [
   {name:"React"},{name:"TypeScript"},{name:"Next.js"},{name:"Node.js"},
   {name:"Python"},{name:"PostgreSQL"},{name:"JavaScript"},{name:"Tailwind CSS"},
-  {name:"HTML"},{name:"CSS"},{name:"Supabase"},
+  {name:"HTML"},{name:"CSS"},{name:"Supabase"},{name:"Java"},
 ];
 
 const PROFILE_IMAGE = "assets/profile.jpg";
@@ -199,6 +199,7 @@ const TechIcon = ({name,size=26})=>{
     case"REST APIs":return<svg width={s} height={s} viewBox="0 0 50 50" fill="none"><circle cx="10" cy="25" r="6" fill="#c0392b"/><circle cx="40" cy="14" r="6" fill="#c0392b"/><circle cx="40" cy="36" r="6" fill="#c0392b"/><line x1="16" y1="23" x2="34" y2="16" stroke="#c0392b" strokeWidth="2.2"/><line x1="16" y1="27" x2="34" y2="34" stroke="#c0392b" strokeWidth="2.2"/></svg>;
     case"Tailwind CSS":return<svg width={s} height={s} viewBox="0 0 50 50" fill="none"><path d="M12 20C14 13 19 9 26 9C20 13 19 19 22 23C25 27 30 25 34 21C32 28 27 32 20 32C26 28 27 22 24 18C21 14 16 16 12 20Z" fill="#38BDF8"/><path d="M28 32C30 25 35 21 42 21C36 25 35 31 38 35C41 39 46 37 50 33C48 40 43 44 36 44C42 40 43 34 40 30C37 26 32 28 28 32Z" fill="#38BDF8"/></svg>;
     case"JavaScript":return<svg width={s} height={s} viewBox="0 0 50 50"><rect x="1" y="1" width="48" height="48" rx="5" fill="#F7DF1E"/><text x="4" y="38" fill="#000" style={{fontSize:22,fontWeight:"900",fontFamily:"Arial,sans-serif"}}>JS</text></svg>;
+    case"Java":return<svg width={s} height={s} viewBox="0 0 50 50" fill="none"><path d="M18 38c6 3 18 2 22-2" stroke="#5382A1" strokeWidth="2.6" strokeLinecap="round"/><path d="M15 32c5 4 20 4 26 0" stroke="#5382A1" strokeWidth="2.4" strokeLinecap="round"/><path d="M20 26c-4 2-3 5 2 6 5 1 13 0 17-2" stroke="#5382A1" strokeWidth="2.1" strokeLinecap="round"/><path d="M25 22c9-5-6-7 2-16" stroke="#E76F00" strokeWidth="2.8" strokeLinecap="round"/><path d="M31 24c4-3-2-5 2-9" stroke="#E76F00" strokeWidth="2.4" strokeLinecap="round"/></svg>;
     case"HTML":return<svg width={s} height={s} viewBox="0 0 50 50" fill="none"><rect x="1" y="1" width="48" height="48" rx="5" fill="#E34F26"/><path d="M14 13L25 13L25 21L18 21L18.5 27L25 27L25 35L17 33L16.5 28L14 28L14.7 36L25 40L25 13Z" fill="white"/><path d="M25 13L36 13L35.3 21L25 21L25 27L34.5 27L33 38L25 40L25 35L31 33L31.5 28L25 28Z" fill="white"/></svg>;
     case"CSS":return<svg width={s} height={s} viewBox="0 0 50 50" fill="none"><rect x="1" y="1" width="48" height="48" rx="5" fill="#1572B6"/><text x="7" y="38" fill="white" style={{fontSize:20,fontWeight:"900",fontFamily:"Arial,sans-serif"}}>CSS</text></svg>;
     case"AWS":return<svg width={s} height={s} viewBox="0 0 50 50" fill="none"><path d="M8 28C5 27 3 24 4 21C5 18 8 17 11 18C11 14 14 11 18 11C19 11 20 11 21 12C22 8 26 5 31 6C36 7 39 12 38 17C40 17 43 19 43 22C43 25 41 28 38 28Z" fill="#FF9900"/><path d="M17 37Q25 41 33 37" stroke="#FF9900" strokeWidth="2.5" fill="none" strokeLinecap="round"/></svg>;
