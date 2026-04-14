@@ -442,12 +442,29 @@
       const email = data.get('email');
       const subject = data.get('subject') || 'portfolio inquiry';
       const message = data.get('message');
-      const mailSubject = encodeURIComponent(`GVBS.DEV ${subject} from ${name}`);
-      const mailBody = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nTopic: ${subject}\n\n${message}`);
+      const btn = document.getElementById('submitBtn');
+      btn.classList.add('loading');
+      btn.textContent = 'Sending...';
 
-      window.location.href = `mailto:hello@gvbs.dev?subject=${mailSubject}&body=${mailBody}`;
-      form.style.display = 'none';
-      document.getElementById('successMsg').classList.add('show');
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, subject, message, source: 'contact-page' })
+        });
+
+        if (!response.ok) throw new Error('Message could not be saved');
+
+        form.style.display = 'none';
+        document.getElementById('successMsg').classList.add('show');
+      } catch {
+        const mailSubject = encodeURIComponent(`GVBS.DEV ${subject} from ${name}`);
+        const mailBody = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nTopic: ${subject}\n\n${message}`);
+        window.location.href = `mailto:hello@gvbs.dev?subject=${mailSubject}&body=${mailBody}`;
+      } finally {
+        btn.classList.remove('loading');
+        btn.textContent = 'Send Message';
+      }
     });
   </script>
 </body>

@@ -506,10 +506,14 @@ function Navbar({t,dark,toggle}) {
         </div>
       )}
 
-      {isMobile&&open&&(
+      {isMobile&&(
         <div style={{position:"absolute",top:62,left:0,right:0,background:t.navBg,
           backdropFilter:"blur(20px)",borderBottom:`1px solid ${t.border}`,
-          padding:"12px 20px 16px",display:"flex",flexDirection:"column",gap:2}}>
+          padding:open?"12px 20px 16px":"0 20px",display:"flex",flexDirection:"column",gap:2,
+          maxHeight:open?520:0,opacity:open?1:0,overflow:"hidden",
+          transform:open?"translateY(0)":"translateY(-8px)",
+          pointerEvents:open?"auto":"none",
+          transition:"max-height 0.32s ease, opacity 0.22s ease, transform 0.32s ease, padding 0.32s ease"}}>
           {NAV.map(link=>(
             <button key={link} onClick={()=>go(link)} style={{background:"transparent",border:"none",
               color:active===link?t.accent:t.sub,padding:"10px 4px",cursor:"pointer",textAlign:"left",
@@ -535,7 +539,7 @@ function ProfilePortrait({t,isMobile}) {
     <Reveal delay={260} x={isMobile?0:24} y={isMobile?18:0}
       style={{position:isMobile?"relative":"absolute",right:isMobile?"auto":"7vw",
         top:isMobile?"auto":"19%",width:isMobile?"100%":"min(34vw,420px)",
-        maxWidth:isMobile?360:"none",margin:isMobile?"34px auto 0":0,zIndex:2}}>
+        maxWidth:isMobile?340:"none",margin:isMobile?"22px auto 0":0,zIndex:2}}>
       <div style={{aspectRatio:"4 / 5",borderRadius:8,overflow:"hidden",
         border:`1px solid ${t.accentBorder}`,background:t.bgCard,
         boxShadow:`0 28px 90px ${t.glow}`,position:"relative"}}>
@@ -581,8 +585,8 @@ function Hero({t}) {
   useEffect(()=>{const id=setInterval(()=>setCur(v=>!v),520);return()=>clearInterval(id);},[]);
 
   return(
-    <section id="About" style={{minHeight:"100vh",display:"flex",alignItems:"center",
-      padding:`80px ${isMobile?"20px":"40px"} 50px`,position:"relative",zIndex:2}}>
+    <section id="About" style={{minHeight:isMobile?"auto":"100vh",display:"flex",alignItems:"center",
+      padding:`${isMobile?"76px":"80px"} ${isMobile?"20px":"40px"} ${isMobile?"36px":"50px"}`,position:"relative",zIndex:2}}>
       <div style={{maxWidth:1080,margin:"0 auto",width:"100%",paddingRight:isMobile?0:"34%"}}>
 
         <Reveal delay={0} y={14}>
@@ -622,7 +626,8 @@ function Hero({t}) {
 
         <Reveal delay={250} y={14}>
           <p style={{fontFamily:"'Inter',sans-serif",fontSize:"clamp(0.9rem,1.6vw,1.05rem)",
-            color:t.sub,maxWidth:520,lineHeight:1.85,marginBottom:34,fontWeight:300}}>
+            color:t.sub,maxWidth:isMobile?"100%":520,width:"100%",lineHeight:1.85,
+            marginBottom:34,fontWeight:300,overflowWrap:"break-word"}}>
             I craft high-performance, scalable applications that solve real problems —
             with clean architecture, sharp developer experience, and code that ships.
           </p>
@@ -677,7 +682,7 @@ function HeroBtn({children,primary,t,onClick}) {
 // ─── SKILLS ──────────────────────────────────────────────────────────────────
 function Skills({t}) {
   return(
-    <section id="Skills" style={{padding:"80px 20px",position:"relative",zIndex:2}}>
+    <section id="Skills" style={{padding:`${typeof window!=="undefined"&&window.innerWidth<640?"54px":"80px"} 20px`,position:"relative",zIndex:2}}>
       <div style={{maxWidth:1080,margin:"0 auto"}}>
         <Reveal>
           <div style={{textAlign:"center",marginBottom:48}}>
@@ -724,7 +729,7 @@ function SkillCard({skill,t,delay}) {
 function Projects({t}) {
   const [modal,setModal]=useState(null);
   return(
-    <section id="Projects" style={{padding:"80px 20px",background:t.bgAlt,position:"relative",zIndex:2}}>
+    <section id="Projects" style={{padding:"80px 20px",background:"transparent",position:"relative",zIndex:2}}>
       <div style={{maxWidth:1080,margin:"0 auto"}}>
         <Reveal>
           <div style={{textAlign:"center",marginBottom:48}}>
@@ -879,7 +884,7 @@ function CommCard({c,t,onClick}) {
 // ─── EXPERIENCE ──────────────────────────────────────────────────────────────
 function Experience({t}) {
   return(
-    <section id="Experience" style={{padding:"80px 20px",background:t.bgAlt,position:"relative",zIndex:2}}>
+    <section id="Experience" style={{padding:"80px 20px",background:"transparent",position:"relative",zIndex:2}}>
       <div style={{maxWidth:1080,margin:"0 auto"}}>
         <Reveal>
           <div style={{textAlign:"center",marginBottom:48}}>
@@ -1021,6 +1026,8 @@ function Testimonials({t}) {
 function Contact({t}) {
   const [form,setForm]=useState({name:"",email:"",message:""});
   const [sent,setSent]=useState(false);
+  const [sending,setSending]=useState(false);
+  const [error,setError]=useState("");
   const [focused,setFocused]=useState(null);
   const w=useWidth();const isMobile=w<540;
 
@@ -1032,16 +1039,25 @@ function Contact({t}) {
     outline:"none",transition:"all 0.22s ease",
     boxShadow:focused===field?`0 0 0 3px ${t.glow}`:"none",
   });
-  const submit = e => {
+  const submit = async e => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Portfolio inquiry from ${form.name}`);
-    const body = encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`);
-    window.location.href = `mailto:hello@gvbs.dev?subject=${subject}&body=${body}`;
-    setSent(true);
+    setSending(true);
+    setError("");
+    try {
+      const res=await fetch("/api/contact",{method:"POST",headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({...form,source:"portfolio"})});
+      if(!res.ok)throw new Error("Message could not be saved");
+      setSent(true);
+      setForm({name:"",email:"",message:""});
+    } catch {
+      setError("The message could not be saved yet. Email me directly at hello@gvbs.dev.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return(
-    <section id="Contact" style={{padding:"80px 20px",background:t.bgAlt,position:"relative",zIndex:2}}>
+    <section id="Contact" style={{padding:"80px 20px",background:"transparent",position:"relative",zIndex:2}}>
       <div style={{maxWidth:620,margin:"0 auto",textAlign:"center"}}>
         <Reveal>
           <BoldLabel t={t}>Get In Touch</BoldLabel>
@@ -1078,13 +1094,16 @@ function Contact({t}) {
                 value={form.message} onChange={e=>setForm({...form,message:e.target.value})}
                 onFocus={()=>setFocused("message")} onBlur={()=>setFocused(null)}
                 style={{...iStyle("message"),resize:"vertical"}}/>
-              <button type="submit" style={{padding:"13px 36px",borderRadius:3,background:t.grad,
+              {error&&<div style={{padding:"10px 12px",borderRadius:4,background:"rgba(192,57,43,0.09)",
+                border:`1px solid ${t.accentBorder}`,color:t.sub,fontFamily:"'Inter',sans-serif",
+                fontSize:12,lineHeight:1.6}}>{error}</div>}
+              <button type="submit" disabled={sending} style={{padding:"13px 36px",borderRadius:3,background:t.grad,
                 border:"none",color:"#fff",fontFamily:"'Inter',sans-serif",fontWeight:600,
                 fontSize:11,letterSpacing:"0.12em",textTransform:"uppercase",cursor:"pointer",
-                boxShadow:`0 0 20px ${t.glow}`,transition:"all 0.22s ease"}}
+                opacity:sending?0.72:1,boxShadow:`0 0 20px ${t.glow}`,transition:"all 0.22s ease"}}
                 onMouseOver={e=>{e.currentTarget.style.transform="translateY(-2px)";e.currentTarget.style.boxShadow=`0 0 36px ${t.glow}`;}}
                 onMouseOut={e=>{e.currentTarget.style.transform="none";e.currentTarget.style.boxShadow=`0 0 20px ${t.glow}`;}}>
-                Send Message
+                {sending?"Sending...":"Send Message"}
               </button>
             </form>
           )}
@@ -1123,7 +1142,7 @@ function Footer({t}) {
   return(
     <footer style={{borderTop:`1px solid ${t.border}`,padding:"22px 24px",
       display:"flex",justifyContent:"space-between",alignItems:"center",
-      flexWrap:"wrap",gap:10,background:t.bgAlt,position:"relative",zIndex:2,
+      flexWrap:"wrap",gap:10,background:"transparent",position:"relative",zIndex:2,
       flexDirection:isMobile?"column":"row",textAlign:isMobile?"center":"left"}}>
       <span style={{fontFamily:"'Cormorant Garamond',serif",fontWeight:600,fontSize:18,color:t.text}}>
         gab<em style={{color:t.accent}}>.dev</em>
@@ -1144,7 +1163,7 @@ function GlobalCSS({t}) {
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap');
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;background:${t.bg};color:${t.text}}
     ::selection{background:rgba(192,57,43,0.2)}
     ::-webkit-scrollbar{width:4px}
     ::-webkit-scrollbar-track{background:${t.bg}}
