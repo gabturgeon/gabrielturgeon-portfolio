@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — GVBS.DEV</title>
+  <meta name="description" content="Contact Gab Dev for full-stack engineering roles, freelance projects, and collaborations." />
+  <meta name="theme-color" content="#080808" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --red:      #e63946;
+      --red-dim:  #c1121f;
+      --bg:       #080808;
+      --bg-2:     #101010;
+      --bg-3:     #181818;
+      --border:   rgba(255,255,255,0.065);
+      --border-2: rgba(255,255,255,0.12);
+      --text:     #f2f2f2;
+      --text-2:   #9a9a9a;
+      --text-3:   #555;
+      --card-bg:  #0f0f0f;
+      --shadow:   rgba(0,0,0,0.7);
+      --input-bg: #131313;
+      --toggle-bg:#252525;
+    }
+    [data-theme="light"] {
+      --bg:       #f2f2f2;
+      --bg-2:     #eaeaea;
+      --bg-3:     #e2e2e2;
+      --border:   rgba(0,0,0,0.07);
+      --border-2: rgba(0,0,0,0.13);
+      --text:     #0e0e0e;
+      --text-2:   #555;
+      --text-3:   #999;
+      --card-bg:  #ffffff;
+      --shadow:   rgba(0,0,0,0.1);
+      --input-bg: #f8f8f8;
+      --toggle-bg:#ddd;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg); color: var(--text);
+      min-height: 100vh; transition: background 0.4s, color 0.4s;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    ::selection { background: var(--red); color: #fff; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-thumb { background: var(--red); border-radius: 4px; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 64px; display: flex; align-items: center; justify-content: space-between;
+      padding: 0 52px;
+      background: rgba(8,8,8,0.82);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      transition: background 0.4s, border-color 0.4s;
+    }
+    [data-theme="light"] nav { background: rgba(242,242,242,0.82); }
+    .logo { font-size: 1rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; }
+    .logo em { color: var(--red); font-style: normal; }
+    .nav-center { display: flex; gap: 40px; list-style: none; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; }
+    .nav-center a { color: var(--text-2); transition: color 0.2s; }
+    .nav-center a:hover, .nav-center a.active { color: var(--text); }
+    .theme-btn {
+      width: 42px; height: 22px; border-radius: 8px;
+      background: var(--toggle-bg); border: 1px solid var(--border);
+      cursor: pointer; position: relative; transition: background 0.3s;
+    }
+    .theme-btn::after {
+      content: ''; position: absolute; top: 3px; left: 3px;
+      width: 14px; height: 14px; border-radius: 8px; background: var(--red);
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    [data-theme="light"] .theme-btn::after { transform: translateX(20px); }
+
+    /* PAGE */
+    .page {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr;
+      padding-top: 64px;
+    }
+
+    /* LEFT PANEL */
+    .left-panel {
+      background: var(--bg-2);
+      border-right: 1px solid var(--border);
+      padding: 80px 60px;
+      display: flex; flex-direction: column; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .left-bg {
+      position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 70% 60% at 30% 55%, rgba(230,57,70,0.08) 0%, transparent 65%);
+    }
+    .left-dots {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px);
+      background-size: 26px 26px;
+      mask-image: radial-gradient(ellipse 80% 70% at 30% 50%, black, transparent);
+    }
+    [data-theme="light"] .left-dots {
+      background-image: radial-gradient(circle, rgba(0,0,0,0.07) 1px, transparent 1px);
+    }
+    .left-content { position: relative; z-index: 1; }
+    .eyebrow {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--red); margin-bottom: 22px;
+    }
+    .eyebrow::before { content: '//'; opacity: 0.5; }
+    .contact-h1 {
+      font-size: clamp(2.4rem, 4vw, 4rem);
+      font-weight: 900; letter-spacing: -0.035em; line-height: 1.0;
+      margin-bottom: 24px;
+    }
+    .contact-h1 em { color: var(--red); font-style: normal; display: block; }
+    .contact-sub {
+      font-size: 0.97rem; color: var(--text-2); line-height: 1.75;
+      max-width: 380px; margin-bottom: 52px;
+    }
+
+    /* Social links */
+    .social-list { display: flex; flex-direction: column; gap: 14px; }
+    .social-item {
+      display: flex; align-items: center; gap: 14px;
+      padding: 16px 20px; border-radius: 8px;
+      background: var(--card-bg); border: 1px solid var(--border);
+      transition: border-color 0.25s, transform 0.25s ease, box-shadow 0.25s;
+      font-size: 0.88rem; font-weight: 500;
+    }
+    .social-item:hover {
+      border-color: var(--red); transform: translateX(6px);
+      box-shadow: 0 8px 28px var(--shadow);
+    }
+    .social-icon {
+      width: 38px; height: 38px; border-radius: 8px;
+      background: var(--bg-3); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      transition: background 0.2s;
+    }
+    .social-item:hover .social-icon { background: var(--red); border-color: var(--red); }
+    .social-item:hover .social-icon svg { stroke: #fff; }
+    .social-icon svg { width: 17px; height: 17px; stroke: var(--text-2); transition: stroke 0.2s; }
+    .social-info { flex: 1; }
+    .social-name { font-weight: 600; color: var(--text); font-size: 0.88rem; }
+    .social-handle { font-size: 0.75rem; color: var(--text-3); margin-top: 2px; }
+    .social-arrow { color: var(--text-3); font-size: 0.9rem; transition: color 0.2s, transform 0.2s; }
+    .social-item:hover .social-arrow { color: var(--red); transform: translateX(3px); }
+
+    /* availability card */
+    .avail-card {
+      margin-top: 36px; padding: 18px 20px;
+      border-radius: 8px; background: var(--card-bg);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; gap: 14px;
+    }
+    .avail-dot {
+      width: 10px; height: 10px; border-radius: 50%; background: #22c55e;
+      box-shadow: 0 0 10px #22c55e; flex-shrink: 0;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.4); }
+    }
+    .avail-text { font-size: 0.84rem; color: var(--text-2); line-height: 1.5; }
+    .avail-text strong { color: var(--text); font-weight: 600; }
+
+    /* RIGHT PANEL — form */
+    .right-panel {
+      padding: 80px 60px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .form-title {
+      font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .form-sub {
+      font-size: 0.85rem; color: var(--text-2); margin-bottom: 36px;
+    }
+    .form { display: flex; flex-direction: column; gap: 18px; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .field { display: flex; flex-direction: column; gap: 7px; }
+    label {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text-3);
+    }
+    input, textarea, select {
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px; padding: 13px 16px;
+      font-family: 'Inter', sans-serif; font-size: 0.88rem;
+      color: var(--text); outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      resize: none;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px rgba(230,57,70,0.12);
+    }
+    input::placeholder, textarea::placeholder { color: var(--text-3); }
+    textarea { min-height: 130px; }
+    select option { background: var(--bg-2); }
+
+    .submit-btn {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 15px 28px; border-radius: 8px;
+      background: var(--red); color: #fff;
+      font-size: 0.92rem; font-weight: 700;
+      border: none; cursor: pointer; letter-spacing: 0.01em;
+      transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+      margin-top: 4px;
+    }
+    .submit-btn:hover {
+      background: var(--red-dim); transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(230,57,70,0.32);
+    }
+    .submit-btn:active { transform: translateY(0); }
+    .submit-btn svg { width: 16px; height: 16px; }
+    .submit-btn.loading { opacity: 0.7; pointer-events: none; }
+
+    /* success state */
+    .success-msg {
+      display: none;
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 16px; text-align: center;
+      padding: 40px 20px;
+    }
+    .success-msg.show { display: flex; }
+    .success-icon {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: rgba(34,197,94,0.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+    }
+    .success-msg h3 { font-size: 1.4rem; font-weight: 800; }
+    .success-msg p { color: var(--text-2); font-size: 0.9rem; }
+
+    /* cursor glow */
+    #cg {
+      position: fixed; width: 350px; height: 350px; border-radius: 50%;
+      pointer-events: none; z-index: 0;
+      background: radial-gradient(circle, rgba(230,57,70,0.06) 0%, transparent 70%);
+      transform: translate(-50%,-50%);
+      transition: left 0.1s, top 0.1s;
+    }
+
+    /* enter animations */
+    .left-content > * { animation: slideRight 0.7s both; }
+    .left-content > *:nth-child(1) { animation-delay: 0.05s; }
+    .left-content > *:nth-child(2) { animation-delay: 0.15s; }
+    .left-content > *:nth-child(3) { animation-delay: 0.25s; }
+    .left-content > *:nth-child(4) { animation-delay: 0.35s; }
+    .left-content > *:nth-child(5) { animation-delay: 0.45s; }
+    @keyframes slideRight {
+      from { transform: translateX(-24px); }
+      to   { transform: translateX(0); }
+    }
+    .right-panel > * { animation: slideLeft 0.7s both; }
+    .right-panel > *:nth-child(1) { animation-delay: 0.1s; }
+    .right-panel > *:nth-child(2) { animation-delay: 0.2s; }
+    .right-panel > *:nth-child(3) { animation-delay: 0.3s; }
+    @keyframes slideLeft {
+      from { transform: translateX(24px); }
+      to   { transform: translateX(0); }
+    }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 20px; }
+      .nav-center { display: none; }
+      .page { grid-template-columns: 1fr; }
+      .left-panel { padding: 60px 28px; border-right: none; border-bottom: 1px solid var(--border); }
+      .right-panel { padding: 50px 28px; }
+      .field-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div id="cg"></div>
+
+  <nav>
+    <a href="index.html" class="logo">GVBS<em>.DEV</em></a>
+    <ul class="nav-center">
+      <li><a href="index.html#Projects">Projects</a></li>
+      <li><a href="index.html#About">About</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+    <div style="display:flex;align-items:center;gap:16px">
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle theme"></button>
+    </div>
+  </nav>
+
+  <div class="page">
+    <!-- LEFT -->
+    <div class="left-panel">
+      <div class="left-bg"></div>
+      <div class="left-dots"></div>
+      <div class="left-content">
+        <div class="eyebrow">Contact</div>
+        <h1 class="contact-h1">
+          Let's build<br/>
+          something
+          <em>great.</em>
+        </h1>
+        <p class="contact-sub">
+          Open to full-time roles, freelance projects, and interesting collaborations. Drop me a message and I'll get back to you within 24 hours.
+        </p>
+
+        <div class="social-list">
+          <a href="mailto:hello@gvbs.dev" class="social-item">
+            <div class="social-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m2 7 10 7 10-7"/></svg>
+            </div>
+            <div class="social-info">
+              <div class="social-name">Email</div>
+              <div class="social-handle">hello@gvbs.dev</div>
+            </div>
+            <div class="social-arrow">→</div>
+          </a>
+          <a href="https://github.com/gvbs" class="social-item" target="_blank" rel="noopener">
+            <div class="social-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </div>
+            <div class="social-info">
+              <div class="social-name">GitHub</div>
+              <div class="social-handle">github.com/gvbs</div>
+            </div>
+            <div class="social-arrow">→</div>
+          </a>
+          <a href="https://linkedin.com/in/gvbs" class="social-item" target="_blank" rel="noopener">
+            <div class="social-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </div>
+            <div class="social-info">
+              <div class="social-name">LinkedIn</div>
+              <div class="social-handle">linkedin.com/in/gvbs</div>
+            </div>
+            <div class="social-arrow">→</div>
+          </a>
+          <a href="mailto:hello@gvbs.dev?subject=Resume%20request" class="social-item">
+            <div class="social-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            </div>
+            <div class="social-info">
+              <div class="social-name">Resume</div>
+              <div class="social-handle">Request PDF</div>
+            </div>
+            <div class="social-arrow">→</div>
+          </a>
+        </div>
+
+        <div class="avail-card">
+          <div class="avail-dot"></div>
+          <div class="avail-text">
+            <strong>Currently available</strong> for new projects &amp; full-time opportunities. Based in Montreal — open to remote worldwide.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right-panel">
+      <div class="form-title">Send a message</div>
+      <div class="form-sub">I read every message and reply within 24 hours.</div>
+
+      <form class="form" id="contactForm">
+        <div class="field-row">
+          <div class="field">
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" name="first_name" placeholder="John" required />
+          </div>
+          <div class="field">
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" name="last_name" placeholder="Doe" required />
+          </div>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="john@company.com" required />
+        </div>
+        <div class="field">
+          <label for="subject">Subject</label>
+          <select id="subject" name="subject">
+            <option value="">Select a topic…</option>
+            <option value="job">Job Opportunity</option>
+            <option value="freelance">Freelance Project</option>
+            <option value="collab">Collaboration</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="msg">Message</label>
+          <textarea id="msg" name="message" placeholder="Tell me about your project or opportunity…" required></textarea>
+        </div>
+        <button type="submit" class="submit-btn" id="submitBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Send Message
+        </button>
+      </form>
+
+      <div class="success-msg" id="successMsg">
+        <div class="success-icon">✅</div>
+        <h3>Message sent!</h3>
+        <p>Thanks for reaching out. I'll get back to you within 24 hours.</p>
+        <a href="index.html" style="color:var(--red);font-size:0.88rem;font-weight:600;margin-top:8px">← Back to portfolio</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* Theme */
+    const html = document.documentElement;
+    document.getElementById('themeBtn').addEventListener('click', () => {
+      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+    html.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
+
+    /* Cursor glow */
+    const cg = document.getElementById('cg');
+    document.addEventListener('mousemove', e => {
+      cg.style.left = e.clientX + 'px';
+      cg.style.top  = e.clientY + 'px';
+    });
+
+    /* Form submit */
+    document.getElementById('contactForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      const form = e.currentTarget;
+      const data = new FormData(form);
+      const name = `${data.get('first_name')} ${data.get('last_name')}`.trim();
+      const email = data.get('email');
+      const subject = data.get('subject') || 'portfolio inquiry';
+      const message = data.get('message');
+      const mailSubject = encodeURIComponent(`GVBS.DEV ${subject} from ${name}`);
+      const mailBody = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nTopic: ${subject}\n\n${message}`);
+
+      window.location.href = `mailto:hello@gvbs.dev?subject=${mailSubject}&body=${mailBody}`;
+      form.style.display = 'none';
+      document.getElementById('successMsg').classList.add('show');
+    });
+  </script>
+</body>
+</html>
